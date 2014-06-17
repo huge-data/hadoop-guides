@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>cc.pp.study</groupId>
+		<artifactId>hadoop-meta</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../hadoop-meta/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>hadoop-chap03</artifactId>
+	<name>Hadoop Chap03</name>
+	<description>Hadoop Distributed Filesystem</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-minicluster</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- <mainClass>cc.pp.hadoop.hdfs.FileCopyWithProgress</mainClass> -->
+							<!-- <mainClass>cc.pp.hadoop.hdfs.URLCat</mainClass> -->
+							<!-- <mainClass>cc.pp.hadoop.hdfs.ListStatus</mainClass> -->
+							<!-- <mainClass>cc.pp.hadoop.hdfs.FileSystemDoubleCat</mainClass> -->
+							<mainClass>cc.pp.hadoop.hdfs.FileTrans</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<!-- <finalName>chap03-FileCopyWithProgress</finalName> -->
+		<!-- <finalName>chap03-URLCat</finalName> -->
+		<!-- <finalName>chap03-ListStatus</finalName> -->
+		<!-- <finalName>chap03-FileSystemDoubleCat</finalName> -->
+		<finalName>chap03-FileTrans</finalName>
+
+	</build>
+
+
+</project>

@@ -1,0 +1,338 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>cc.pp.study</groupId>
+		<artifactId>hadoop-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../hadoop-parent/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>hadoop-meta</artifactId>
+	<packaging>pom</packaging>
+	<name>Hadoop Meta</name>
+	<description>Hadoop components dependencies</description>
+
+	<build>
+		<plugins>
+			<!-- 继承父类插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>apache-1</id>
+			<activation>
+				<property>
+					<name>hadoop.version</name>
+					<value>1.2.1</value>
+				</property>
+			</activation>
+			<properties>
+				<hadoop.version>1.2.1</hadoop.version>  <!-- 1.1.1 -->
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-core</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-test</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<!-- 运行时需要的包 -->
+				<dependency>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>com.sun.jersey</groupId>
+					<artifactId>jersey-core</artifactId>
+					<version>1.17.1</version>  <!-- 1.8 -->
+				</dependency>
+				<dependency>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-mapper-asl</artifactId>
+					<version>1.9.13</version>  <!-- 1.5.2 -->
+				</dependency>
+				<dependency>
+					<groupId>org.apache.mrunit</groupId>
+					<artifactId>mrunit</artifactId>
+					<version>0.8.0</version>   <!-- 0.8.1-incubating -->
+					<classifier>hadoop1</classifier>  <!-- hadoop100 -->
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>LookupRecordByTemperature.java</exclude>
+								<exclude>LookupRecordsByTemperature.java</exclude>
+								<exclude>MaxTemperatureByStationNameUsingDistributedCacheFileApi.java</exclude>
+								<exclude>NewMissingTemperatureFields.java</exclude>
+								<exclude>SortByTemperatureToMapFile.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>apache-20</id> <!-- cdh3 -->
+			<activation>
+				<property>
+					<name>hadoop.version</name>
+					<value>0.20.2</value>  <!-- 0.20.2-cdh3u5 -->
+				</property>
+			</activation>
+			<properties>
+				<hadoop.version>0.20.2</hadoop.version>  <!-- 0.20.2-cdh3u5 -->
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-core</artifactId>
+					<version>${hadoop.version}</version>
+					<exclusions>
+						<exclusion>
+							<groupId>org.codehaus.jackson</groupId>
+							<artifactId>jackson-core-asl</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-test</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<!-- 运行时需要的包 -->
+				<dependency>
+					<groupId>log4j</groupId>
+					<artifactId>log4j</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>jackson-core-asl</artifactId>
+					<!-- 要和Avto匹配 -->
+					<version>1.9.13</version>  <!-- 1.7.3 -->
+				</dependency>
+				<dependency>
+					<groupId>org.apache.mrunit</groupId>
+					<artifactId>mrunit</artifactId>
+					<version>1.0.0</version>   <!-- 0.8.1-incubating -->
+					<classifier>hadoop1</classifier>  <!-- hadoop100 -->
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>LookupRecordByTemperature.java</exclude>
+								<exclude>LookupRecordsByTemperature.java</exclude>
+								<exclude>MaxTemperatureByStationNameUsingDistributedCacheFileApi.java</exclude>
+								<exclude>NewMissingTemperatureFields.java</exclude>
+								<exclude>SortByTemperatureToMapFile.java</exclude>
+								<exclude>SortByTemperatureUsingTotalOrderPartitioner.java</exclude>
+							</excludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<!-- 0.22.0 这个版本没有 -->
+		<profile>
+			<id>apache-22</id>
+			<activation>
+				<property>
+					<name>hadoop.version</name>
+					<value>0.22.0</value>
+				</property>
+			</activation>
+			<properties>
+				<hadoop.version>0.22.0</hadoop.version>
+			</properties>
+			<dependencies>
+				<!-- 下面3个包都有0.22.0 -->
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-common</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-common-test</artifactId>
+					<version>${hadoop.version}</version>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-hdfs</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-hdfs-test</artifactId>
+					<version>${hadoop.version}</version>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapred</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapred-test</artifactId>
+					<version>${hadoop.version}</version>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.mrunit</groupId>
+					<artifactId>mrunit</artifactId>
+					<version>0.8.1-incubating</version>
+					<classifier>hadoop023</classifier>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<excludes>
+								<exclude>NewMissingTemperatureFields.java</exclude>  <!-- Task.Counter missing -->
+							</excludes>
+							<testExcludes>
+								<exclude>CoherencyModelTest.java</exclude>
+								<exclude>ShwoFileStatusTest.java</exclude>
+								<exclude>v1/MaxTemperatureReducerTest.java</exclude> <!-- Class cast problem in MRUint -->
+								<exclude>v3/MaxTemperatureDriverMiniTest.java</exclude>  <!-- Failing -->
+							</testExcludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<!-- 没有2.0.2-alpha -->
+			<id>apache-2</id>
+			<activation>
+				<property>
+					<name>hadoop.version</name>
+					<value>2.0.2</value>  <!-- 2.0.2-alpha -->
+				</property>
+			</activation>
+			<properties>
+				<hadoop.version>2.0.2</hadoop.version>  <!-- 2.0.2-alpha -->
+			</properties>
+			<dependencies>
+				<!-- 下面3个包都有2.0.2 -->
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-common</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-common</artifactId>
+					<version>${hadoop.version}</version>
+					<type>test-jar</type>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-hdfs</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-hdfs</artifactId>
+					<version>${hadoop.version}</version>
+					<type>test-jar</type>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-app</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-common</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-core</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-hs</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+					<version>${hadoop.version}</version>
+					<type>test-jar</type>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-yarn-common</artifactId>
+					<version>${hadoop.version}</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-yarn-server-tests</artifactId>
+					<version>${hadoop.version}</version>
+					<type>test-jat</type>
+					<scope>test</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.mrunit</groupId>
+					<artifactId>mrunit</artifactId>
+					<version>0.8.1-incubating</version>
+					<classifier>hadoop023</classifier>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<configuration>
+							<testExcludes>
+								<exclude>v3/MaxTemperatureDriverMiniTest.java</exclude>  <!-- Failing -->
+							</testExcludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+</project>

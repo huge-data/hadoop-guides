@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cc.pp.study</groupId>
+	<artifactId>hadoop-guides</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Hadoop Guides</name>
+	<description>Hadoop: The Definitive Guide, Example Code</description>
+	<url>http://hadoopbook.com</url>
+
+	<modules>
+		<module>hadoop-parent</module>
+		<module>hadoop-meta</module>
+		<module>hadoop-solr</module>
+		<module>mapreduce-examples</module>
+		<module>hadoop-chap02</module>
+		<module>hadoop-chap03</module>
+		<module>hadoop-chap04</module>
+		<module>hadoop-chap05</module>
+	</modules>
+
+</project>
