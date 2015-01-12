@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>cc.pp.study</groupId>
+	<groupId>zx.soft</groupId>
 	<artifactId>hadoop-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<name>Hadoop Parent</name>
 	<description>Hadoop: The Definitive Guide, Project</description>

@@ -66,6 +66,7 @@ public final class BooleanDataAndDateDataModel extends FileDataModel {
 		return resultFile;
 	}
 
+	@SuppressWarnings("deprecation")
 	public static File readResourceToTempFile(String resourceName) throws IOException {
 		InputSupplier<? extends InputStream> inSupplier;
 		try {
